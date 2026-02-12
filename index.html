@@ -5,21 +5,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Examen-APIs: Car</title>
     <style>
-        .card{
-            border-radius: 10%;
-            border-color: black;
-
+        /* Estilo Plano y Minimalista [cite: 93, 133] */
+        body { 
+            font-family: 'Arial', sans-serif; 
+            background-color: #fff; 
+            color: #000;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            padding: 30px; 
         }
+
+        .controles { margin-bottom: 20px; }
+
+        .btn { 
+            padding: 12px 20px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            border: 3px solid #000; 
+            background: #fff; 
+            margin: 5px;
+            text-transform: uppercase;
+        }
+        .btn:hover { background: #000; color: #fff; }
+
+        /* Estilo de las Tablas (Sección Inicial)  */
+        .contenedor-tablas {
+            display: flex;
+            gap: 20px;
+            width: 800px;
+            margin-bottom: 30px;
+        }
+
+        table {
+            flex: 1;
+            border-collapse: collapse;
+            border: 3px solid #000;
+        }
+
+        th, td {
+            border: 1px solid #000;
+            padding: 10px;
+            text-align: left;
+            font-size: 13px;
+        }
+
+        th { background: #000; color: #fff; text-transform: uppercase; }
+
+        /* Tarjeta Horizontal Integrada [cite: 79, 111] */
+        .tarjeta-horizontal {
+            display: flex;
+            border: 4px solid #000;
+            width: 600px;
+            background: #fff;
+            align-items: center;
+        }
+
+        .foto-perfil {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-right: 4px solid #000;
+        }
+
+        .info-final { padding: 20px; flex-grow: 1; }
+        .info-final h2 { margin-top: 0; border-bottom: 2px solid #000; }
+
+        .bandera-card { width: 50px; border: 1px solid #000; display: block; margin-top: 10px; }
+
+        .error-msg { border: 2px solid red; color: red; padding: 10px; margin: 10px; font-weight: bold; }
     </style>
 </head>
 <body>
-    <div id="user-card" class="card">
-
+    <h1>Examen datos APIs</h1>
+    
+    <div class="controles">
+        <button id="btnCargar" class="btn">1. Cargar Tablas</button>
+        <button id="btnGenerar" class="btn">2. Generar Tarjeta</button>
     </div>
-    <button id="btnCargar">Cargar usuario</button>
 
+    <div id="mensajes"></div>
+    <div id="zona-tablas" class="contenedor-tablas"></div>
+    <div id="zona-tarjeta"></div>
 
-    <!-- Script -->
     <script src="script.js"></script>
 </body>
 </html>
