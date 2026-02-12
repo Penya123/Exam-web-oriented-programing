@@ -6,13 +6,12 @@ let almacen = null;
     const zonaTarjeta = document.getElementById('zona-tarjeta');
     const msjBox = document.getElementById('mensajes');
 
-    // FUNCIÓN 1: CARGAR AMBAS APIS Y MOSTRAR TABLAS [cite: 50, 56, 122]
     btnCargar.addEventListener('click', async () => {
         zonaTablas.innerHTML = '';
         zonaTarjeta.innerHTML = '';
         msjBox.innerHTML = '';
         
-        btnCargar.textContent = "Cargando..."; // [cite: 71]
+        btnCargar.textContent = "Cargando..."; 
         btnCargar.disabled = true;
 
         try {
@@ -20,7 +19,6 @@ let almacen = null;
             const paisesRef = ["Mexico", "Canada", "Japan", "Italy", "Spain"];
             const miPais = paisesRef[id % 5];
 
-            // Peticiones [cite: 58]
             const [resU, resP] = await Promise.all([
                 fetch(`https://jsonplaceholder.typicode.com/users/${id}`),
                 fetch(`https://restcountries.com/v3.1/name/${miPais}?fullText=true`)
@@ -31,7 +29,6 @@ let almacen = null;
             const user = await resU.json();
             const country = await resP.json();
 
-            // Guardar datos [cite: 51, 123]
             almacen = {
                 nombre: user.name,
                 edad: 18 + id,
@@ -42,13 +39,11 @@ let almacen = null;
                 region: country[0].region
             };
 
-            // CREAR TABLA 1: USUARIO [cite: 27, 77]
             const tablaU = document.createElement('table');
             tablaU.innerHTML = `<tr><th colspan="2">API Usuario</th></tr>
                                 <tr><td>Nombre</td><td>${almacen.nombre}</td></tr>
                                 <tr><td>Edad</td><td>${almacen.edad}</td></tr>`;
             
-            // CREAR TABLA 2: PAÍS [cite: 27, 77]
             const tablaP = document.createElement('table');
             tablaP.innerHTML = `<tr><th colspan="2">API País</th></tr>
                                 <tr><td>Capital</td><td>${almacen.capital}</td></tr>
@@ -60,7 +55,7 @@ let almacen = null;
         } catch (e) {
             const err = document.createElement('div');
             err.classList.add('error-msg');
-            err.textContent = "ERROR: No se pudieron obtener los datos."; // [cite: 104, 130]
+            err.textContent = "ERROR: No se pudieron obtener los datos."; 
             msjBox.appendChild(err);
         } finally {
             btnCargar.textContent = "1. Cargar Tablas";
@@ -68,19 +63,17 @@ let almacen = null;
         }
     });
 
-    // FUNCIÓN 2: TARJETA INTEGRADA [cite: 79, 124]
     btnGenerar.addEventListener('click', () => {
         zonaTarjeta.innerHTML = '';
 
         if (!almacen) {
             const err = document.createElement('div');
             err.classList.add('error-msg');
-            err.textContent = "Error: Primero carga los datos de las tablas."; // [cite: 105, 131]
+            err.textContent = "Error: Primero carga los datos de las tablas."; 
             msjBox.appendChild(err);
             return;
         }
 
-        // Construcción dinámica [cite: 84]
         const card = document.createElement('div');
         card.classList.add('tarjeta-horizontal');
 
@@ -93,7 +86,7 @@ let almacen = null;
 
         const h2 = document.createElement('h2');
         h2.textContent = almacen.nombre;
-        h2.style.color = "#000"; // Cambio de estilo dinámico [cite: 100]
+        h2.style.color = "#000"; 
 
         const p = document.createElement('p');
         p.innerHTML = `ID: ${almacen.edad}<br>Ubicación: ${almacen.capital}, ${almacen.pais}<br>Zona: ${almacen.region}`;
